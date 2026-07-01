@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>チームメンバー一覧</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-8">
+    <div class="bg-blue-300 rounded-lg shadow px-8 py-4">
+        <h1 class="font-bold text-3xl mx-auto mb-4">TEAM-MEMBER</h1>
+        <div class="flex flex-col md:flex-row gap-2 mb-6 items-center rounded-lg p-8 bg-white border border-gray-300 shadow mx-auto">
+        <div class="bg-white shadow border-4 border-blue-300 shadow p-4 rounded-lg mb-4">
+            <input id="nameinput" type="text" placeholder="名前" class="font-bold text-xl">
+        </div>
+        
+        <div class="bg-white shadow border-4 border-blue-300 shadow p-4 rounded-lg mb-4">
+            <input id="rollinput" type="text" placeholder="役割" class="font-bold text-xl">
+        </div>
+        
+        <div class="bg-white shadow border-4 border-blue-300 shadow p-4 rounded-lg mb-4">
+            <input id="cominput" type="text" placeholder="コメント" class="font-bold text-xl">
+        </div>
+        <button id="inputbutton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            追加
+        </button>       
+    </div>
+        <div id="memberlist" class="flex flex-col md:grid grid-cols-3 p-4 gap-4 text-center"></div>
+    </div>
+
+    <script>
+    const members = [
+        { name: "森保 一", role:"監督" , comment: "絢世たたかうよー"},
+        { name:"長友 佑都", role:"SB", comment:"マンマミーア"},
+        { name:"久保 建英", role:"RMF/ST", comment:"俺のはイングリッシュイングリッシュ"}
+    ]
+    const memberlist = document.getElementById("memberlist");
+
+    members.forEach((member)=>{
+
+    const card = document.createElement("div")
+    card.className = "p-4 shadow rounded-lg bg-white gap-4"
+
+    card.innerHTML=`
+    <h2 class="font-bold text-xl">${member.name}</h2>
+    <p class="text-blue-600 font-bold text-lg">${member.role}</p>
+    <p class="md-2">${member.comment}</p>
+    `;
+
+    memberlist.appendChild(card);
+
+    });
+
+    const inputButton = document.getElementById("inputbutton");
+    inputButton.addEventListener("click", ()=>{
+        const nameInput = document.getElementById("nameinput");
+        const rollInput = document.getElementById("rollinput");
+        const comInput = document.getElementById("cominput");
+
+        const text = nameInput.value;
+        if (text === "") {
+            return;
+        }
+
+        const text2 = rollInput.value;
+        if (text2 === "") {
+            return;
+        }   
+
+        const text3 = comInput.value;
+        if (text3 === "") {
+            return;
+        }
+
+        const NewMember = {
+            name: nameInput.value,
+            role: rollInput.value,
+            comment: comInput.value
+        };
+
+        const card = document.createElement("div")
+    card.className = "p-4 shadow rounded-lg bg-white gap-4"
+
+    card.innerHTML=`
+    <h2 class="font-bold text-xl">${NewMember.name}</h2>
+    <p class="text-blue-600 font-bold text-lg">${NewMember.role}</p>
+    <p class="md-2">${NewMember.comment}</p>
+    `;
+
+    memberlist.appendChild(card);
+
+    nameInput.value = "";
+    rollInput.value = "";   
+    comInput.value = ""; 
+    });
+
+    </script>
+  </body>
+</html>
